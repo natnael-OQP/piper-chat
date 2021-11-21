@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Feed from '../components/Feed'
 import NaveBar from '../components/Navebar'
 
 export default function Home() {
@@ -8,7 +9,10 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NaveBar/>
+      {/* Header component */}
+      <NaveBar />
+      {/* Feed component */}
+      <Feed/>
     </div>
   )
 }
