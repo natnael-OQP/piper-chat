@@ -8,11 +8,12 @@ import {
     PaperAirplaneIcon,
     MenuIcon,
     HeartIcon,
+    HomeIcon,
 } from '@heroicons/react/outline'
 
 const NaveBar = () => {
     return (
-        <div className="w-full bg-white shadow-sm h-14 " >
+        <div className="w-full bg-white shadow-sm h-14 border-b sticky top-0 z-50 " >
             {/* Wrapper */}
             <div className="flex items-center h-full px-2 justify-between max-w-5xl mx-auto " >
                 {/* large logo */}
@@ -30,11 +31,18 @@ const NaveBar = () => {
                 </div>
                 {/* right */}
                 <div className="flex items-center " >
-                    <PlusCircleIcon className=" mr-2 w-5 h-5 cursor-pointer text-gray-400  " />
-                    <UserGroupIcon className=" mr-2 w-5 h-5 cursor-pointer text-gray-400  " />
-                    <PaperAirplaneIcon className=" mr-2 w-5 h-5 cursor-pointer text-gray-400  " />
-                    <MenuIcon className=" mr-2 w-5 h-5 cursor-pointer text-gray-400  " />
-                    <HeartIcon className=" mr-2 w-5 h-5 cursor-pointer text-gray-400  " />
+                    <MenuIcon className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
+                    <HomeIcon className="navIcon" />
+                    <div className="relative navIcon " >
+                        <PaperAirplaneIcon className="navIcon rotate-45 " />
+                        <span className="absolute -top-1 -right-2 w-5 h-5  flex items-center justify-center rounded-full bg-red-500 animate-bounce text-white  " >1</span>
+                    </div>
+                    <PlusCircleIcon className="navIcon  " />
+                    <UserGroupIcon className="navIcon" />
+                    <HeartIcon className="navIcon" />
+                    <div className="mx-2 sm:mx-4 ring-1 ring-black w-10  h-10 rounded-full relative shadow-md cursor-pointer overflow-hidden " >
+                        <Image layout="fill" objectFit="cover" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png" alt="user" />
+                    </div>
                 </div>
             </div>
         </div>
