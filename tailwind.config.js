@@ -7,6 +7,10 @@ module.exports = {
   },
   variants: {
     extend: {},
+    scrollbar: ['dark'],
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+    require('tailwind-scrollbar-hide'),
+  ],
 }
