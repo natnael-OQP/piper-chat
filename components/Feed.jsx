@@ -4,7 +4,7 @@ import Posts from './Posts'
 
 const Feed = () => {
     return (
-        <div className="max-w-5xl h-screen mx-auto px-4 flex relative scrollbar-hide  " >
+        <div className="max-w-5xl h-screen mx-auto px-4 flex relative  overflow-y-scroll scrollbar-hide  " >
             {/* Section */}
             <section className="flex flex-col mr-4 bg-gray-50 w-full " >
                 {/* Stories */}

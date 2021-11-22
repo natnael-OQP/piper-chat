@@ -4,7 +4,7 @@ import NaveBar from '../components/Navebar'
 
 export default function Home() {
   return (
-    <div>
+    <div className="scrollbar-hide h-screen overflow-y-scroll " >
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
