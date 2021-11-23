@@ -6,4 +6,7 @@
     .navIcon{
         @apply hidden sm:inline-block mr-3 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100
     }
+    .postBtn{
+        @apply mr-3 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100
+    }
 }
