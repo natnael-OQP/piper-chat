@@ -16,7 +16,7 @@ const Post = ({userName, userImage, images, caption }) => {
             </div>
             {/* Images */}
             <div className="" >
-                <img className="w-full object-contain " src={images} alt={userName} />
+                <img className="w-full object-cover " src={images} alt={userName} />
             </div>
             {/* Button */}
             <div>
