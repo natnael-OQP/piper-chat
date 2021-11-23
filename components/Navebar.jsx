@@ -27,7 +27,7 @@ const NaveBar = () => {
                 {/* meddle */}
                 <div className="bg-gray-200 w-56 pr-2 cursor-pointer transform transition-all md:w-72 hover:border-2 hover: border-gray-900 lg:w-96 h-9 rounded-md pl-2 overflow-hidden  flex items-center shadow-sm hover:shadow-md " >
                     <SearchIcon className="w-5 h-5 text-gray-500 " />
-                    <input className="   pl-3 w-full h-full bg-transparent  text-gray-600 font-medium text-sm md:text-base  outline-none  " placeholder="search..." type="search" />
+                    <input className="   pl-3 w-full h-full bg-transparent  text-gray-400 font-medium text-sm md:text-base  outline-none  " placeholder="search..." type="search" />
                 </div>
                 {/* right */}
                 <div className="flex items-center " >
@@ -40,8 +40,8 @@ const NaveBar = () => {
                     <PlusCircleIcon className="navIcon  " />
                     <UserGroupIcon className="navIcon" />
                     <HeartIcon className="navIcon" />
-                    <div className="mx-2 sm:mx-4 ring-1 ring-black w-10  h-10 rounded-full relative shadow-md cursor-pointer overflow-hidden " >
-                        <Image layout="fill" objectFit="cover" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png" alt="user" />
+                    <div className=" hover:scale-105 transform transition-all mx-2 sm:mx-4 ring-1 ring-black w-10  h-10 rounded-full relative shadow-md cursor-pointer overflow-hidden " >
+                        <Image  layout="fill" objectFit="cover" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png" alt="user" />
                     </div>
                 </div>
             </div>
