@@ -1,7 +1,14 @@
 import React from 'react'
 import {
-    DotsHorizontalIcon
+    BookmarkIcon,
+    ChatIcon,
+    DotsHorizontalIcon, HeartIcon, PaperAirplaneIcon,
+
 } from '@heroicons/react/outline'
+
+import {
+    HeartIcon as HeartIconFilled
+} from '@heroicons/react/solid'
 
 const Post = ({userName, userImage, images, caption }) => {
     return (
@@ -12,24 +19,30 @@ const Post = ({userName, userImage, images, caption }) => {
                     <img className="w-12 h-12 rounded-full object-cover ring-1 ring-black " src={userImage} alt={userName} />
                     <h1 className="ml-4" >{userName}</h1>
                 </div>
-                <DotsHorizontalIcon className=" mr-3 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100 " />
+                <DotsHorizontalIcon className="postBtn" />
             </div>
             {/* Images */}
             <div className="" >
                 <img className="w-full object-cover " src={images} alt={userName} />
             </div>
             {/* Button */}
-            <div>
-                <h1>hello </h1>
+            <div className="flex items-center justify-between p-2  " >
+                <div>
+                    <HeartIcon  className="postBtn" />
+                    <ChatIcon className="postBtn" />
+                    <PaperAirplaneIcon className="postBtn" />
+                </div>
+                <BookmarkIcon/>
             </div>
             {/* caption */}
             <div>
-            
+                <h2>adfkds</h2>
             </div>
             {/* comment */}
-            <div>
-            
-            </div>
+            <div></div>
+            {/* Input Filled */}
+            <div></div>
+
         </div>
     )
 }
