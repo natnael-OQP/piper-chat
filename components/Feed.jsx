@@ -4,7 +4,7 @@ import Posts from './Posts'
 
 const Feed = () => {
     return (
-        <div className=" grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4 max-w-5xl h-full mx-auto px-4 overflow-y-hidden  scrollbar-hide  " >
+        <div className=" grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4 max-w-3xl  lg:max-w-5xl h-full mx-auto px-4 overflow-y-hidden  scrollbar-hide  " >
             {/* Left */}
             <section className="col-span-2 lg:col-span-3  mr-4 h-full overflow-y-scroll scrollbar-hide   " >
                 {/* Stories */}
