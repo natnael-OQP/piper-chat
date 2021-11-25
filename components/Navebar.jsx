@@ -25,7 +25,7 @@ const NaveBar = () => {
                     <Image layout="fill" objectFit="contain" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png" />
                 </div>
                 {/* meddle */}
-                <div className="bg-gray-200 w-56 pr-2 cursor-pointer transform transition-all md:w-72 hover:border-2 hover: border-gray-900 lg:w-96 h-9 rounded-md pl-2 overflow-hidden  flex items-center shadow-sm hover:shadow-md " >
+                <div className="bg-gray-200 w-56 hover:w-60  pr-2 cursor-pointer transform transition-all md:w-72 md:hover:w-80 hover:border-2 hover: border-gray-900 lg:w-96 lg:hover:w-[420px] h-9 rounded-md pl-2 overflow-hidden  flex items-center shadow-sm hover:shadow-md " >
                     <SearchIcon className="w-5 h-5 text-gray-500 " />
                     <input className="   pl-3 w-full h-full bg-transparent  text-gray-400 font-medium text-sm md:text-base  outline-none  " placeholder="search..." type="search" />
                 </div>
