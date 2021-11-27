@@ -12,7 +12,7 @@ import {
 
 const Post = ({userName, userImage, images, caption }) => {
     return (
-        <div className=" bg-white py-1 mt-3 rounded-sm shadow-sm px-[5px] " >
+        <div className=" bg-white py-1 mt-3 rounded-sm shadow-sm px-[5px] pb-6" >
             {/* Header */}
             <div className="w-full flex items-center justify-between  " >
                 <div className="flex items-center  " >
