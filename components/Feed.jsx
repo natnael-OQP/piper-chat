@@ -1,22 +1,25 @@
 import React from 'react'
 import Stories from './Stories'
 import Posts from './Posts'
+import Mini_Profile from './Mini_Profile'
+import Suggestion from './Suggestion'
 
 const Feed = () => {
     return (
-        <div className="max-w-md grid grid-cols-1 sm:gap-4 sm:grid-cols-3 lg:grid-cols-3 sm:max-w-3xl  lg:max-w-4xl h-full mx-auto px-4 overflow-y-hidden  scrollbar-hide  " >
+        <div className="max-w-md grid grid-cols-1 sm:gap-4 md:grid-cols-3 lg:grid-cols-3 md:max-w-3xl  lg:max-w-4xl h-full mx-auto px-4 overflow-y-hidden  scrollbar-hide  " >
             {/* Left */}
-            <section className=" sm:col-span-2 lg:col-span-2  mr-4 h-full overflow-y-scroll scrollbar-hide   " >
+            <section className=" md:col-span-2 lg:col-span-2  mr-4 h-full overflow-y-scroll scrollbar-hide   " >
                 {/* Stories */}
                 <Stories/>
                 {/* post */}
                 <Posts/>
             </section>
             {/* Right */}
-            <section className="hidden sm:block bg-gray-100 h-96 sticky top-14 " >
+            <section className="hidden md:block  h-96 sticky top-14 " >
                 {/* Mini Profile */}
-                <h1>suggestion</h1>
+                <Mini_Profile/>
                 {/* Suggestion */}
+                <Suggestion/>
             </section>
         </div>
     )
