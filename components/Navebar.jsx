@@ -9,9 +9,14 @@ import {
     MenuIcon,
     HeartIcon,
     HomeIcon,
-} from '@heroicons/react/outline'
+} from '@heroicons/react/outline';
+
+import { signIn,signOut, useSession} from "next-auth/react"
 
 const NaveBar = () => {
+
+    const { data: session } = useSession();
+    
     return (
         <div className="w-full bg-white shadow-sm h-14 border-b sticky top-0 z-50 " >
             {/* Wrapper */}
@@ -33,16 +38,27 @@ const NaveBar = () => {
                 <div className="flex items-center " >
                     <MenuIcon className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
                     <HomeIcon className="navIcon" />
-                    <div className="relative navIcon " >
-                        <PaperAirplaneIcon className="navIcon rotate-45 " />
-                        <span className="absolute -top-1 -right-2 w-5 h-5  flex items-center justify-center rounded-full bg-red-500 animate-bounce text-white  " >1</span>
-                    </div>
-                    <PlusCircleIcon className="navIcon  " />
-                    <UserGroupIcon className="navIcon" />
-                    <HeartIcon className="navIcon" />
-                    <div className=" hover:scale-105 transform transition-all mx-2 sm:mx-4 ring-1 ring-black w-10  h-10 rounded-full relative shadow-md cursor-pointer overflow-hidden " >
-                        <Image  layout="fill" objectFit="cover" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png" alt="user" />
-                    </div>
+                    {
+                        session ? (
+                            <>
+                                <div className="relative navIcon " >
+                                    <PaperAirplaneIcon className="navIcon rotate-45 " />
+                                    <span className="absolute -top-1 -right-2 w-5 h-5  flex items-center justify-center rounded-full bg-red-500 animate-bounce text-white  " >1</span>
+                                </div>
+                                <PlusCircleIcon className="navIcon  " />
+                                <UserGroupIcon className="navIcon" />
+                                <HeartIcon className="navIcon" />
+                                {/* profile */}
+                                <div className=" hover:scale-105 transform transition-all mx-2 sm:mx-4 ring-1 ring-black w-10  h-10 rounded-full relative shadow-md cursor-pointer overflow-hidden " >
+                                    <img
+                                        onClick={signOut}
+                                        className="object-contain w-full h-full " src={session?.user?.image} alt="user" />
+                                </div>
+                            </>
+                        ): (
+                            <button onClick={signIn} >sign In </button>
+                        )
+                    }
                 </div>
             </div>
         </div>
