@@ -22,7 +22,7 @@ const Suggestion = () => {
             {
                 fakeData.map((profile)=>(
                     <Follow
-                        key={profile?.id}
+                        key={profile?.i}
                         photo={profile?.avatar}
                         username={profile?.username}
                         workAt={profile.company.name}
