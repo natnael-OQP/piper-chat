@@ -1,5 +1,6 @@
-
+import { useSession } from 'next-auth/react';
 const Mini_Profile = () => {
+    
     return (
         <div className="" >
             <div className="flex items-center  " >
