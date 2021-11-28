@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     BookmarkIcon,
     ChatIcon,
@@ -10,9 +10,25 @@ import {
     HeartIcon as HeartIconFilled
 } from '@heroicons/react/solid'
 
-const Post = ({userName, userImage, images, caption }) => {
+// ********************------ emojis ------********************
+
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
+
+const Post = ({ userName, userImage, images, caption }) => {
+    const [emojis, setEmojis] = useState(false);
+    const [input, setInput] = useState('');
+
+    const addEmoji = (e) => {
+        let sym = e.unified.split("-");
+        let codesArray = [];
+        sym.forEach((el) => codesArray.push("0x" + el));
+        let emoji = String.fromCodePoint(...codesArray);
+        setInput(input + emoji);
+    };
+    
     return (
-        <div className=" bg-white py-1 mt-3 rounded-sm shadow-sm px-[5px] pb-6" >
+        <div className=" bg-white py-1 mt-3 rounded-sm shadow-sm px-[5px] pb-6 relative " >
             {/* Header */}
             <div className="w-full flex items-center justify-between  " >
                 <div className="flex items-center  " >
@@ -41,12 +57,31 @@ const Post = ({userName, userImage, images, caption }) => {
             {/* comment */}
             <div></div>
             {/* Input Filled */}
-            <form className="flex items-center p-2 h-10  " >
-                <EmojiHappyIcon className="postBtn w-6 h-6 " />
-                <input className="shadow-sm text-sm font-medium rounded-md ring-green-300 border-none w-full outline-none py-[5px] px-[10px] focus:ring-1 text-gray-500 " type="text" placeholder="write your comment " />
+            <form className="flex items-center p-2 h-10 relative " >
+                <EmojiHappyIcon
+                    onClick={()=>setEmojis(!emojis)}
+                    className="postBtn w-6 h-6 "
+                />
+                <input
+                    value={input}
+                    onChange={(e)=>setInput(e.target.value)}
+                    className="shadow-sm text-sm font-medium rounded-md ring-green-300 border-none w-full outline-none py-[5px] px-[10px] focus:ring-1 text-gray-500 " type="text" placeholder="write your comment " />
                 <button className="font-semibold text-blue-400 px-1 " type="submit" >post</button>
             </form>
-
+            {
+                emojis && (
+                <Picker
+                    onSelect={addEmoji}
+                    style={{
+                        position: "absolute",
+                        bottom: "62px",
+                        right: "10px" ,
+                        maxWidth: "320px",
+                        borderRadius: "10px",
+                    }}
+                    theme="dark"
+                />
+            )}
         </div>
     )
 }
