@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { useSession, signOut,signIn, getProviders } from "next-auth/react"
-import Link from 'next/link'
 
 import {
     SearchIcon,
@@ -13,12 +12,20 @@ import {
     HomeIcon,
 } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
-
+import { useRecoilState } from 'recoil';
+import {modelState} from '../atoms/modelAtom'
 
 
 const NaveBar = () => {
     const {data: session} = useSession();
     const router = useRouter();
+    // model global state
+    const [open, setOpen] = useRecoilState(modelState);
+    // toggle 
+    const toggle = () => {
+        setOpen(!open);
+    }
+    console.log(open);
     return (
         <div className="w-full bg-white shadow-sm h-14 border-b sticky top-0 z-50 " >
             {/* Wrapper */}
@@ -56,7 +63,9 @@ const NaveBar = () => {
                                     <PaperAirplaneIcon className="navIcon rotate-45 " />
                                     <span className="absolute -top-1 -right-2 w-5 h-5  flex items-center justify-center rounded-full bg-red-500 animate-bounce text-white  " >1</span>
                                 </div>
-                                <PlusCircleIcon className="navIcon  " />
+                                <PlusCircleIcon
+                                    onClick={toggle}
+                                    className="navIcon  " />
                                 <UserGroupIcon className="navIcon" />
                                 <HeartIcon className="navIcon" />
                                 {/* profile */}
