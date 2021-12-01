@@ -6,8 +6,8 @@ import SignIn from '../components/SignIn';
 
 export default function Home({ providers }) {
   
-  const { data: session } = useSession();
-  if (!session) return <SignIn providers={providers} />;
+  // const { data: session } = useSession();
+  // if (!session) return <SignIn providers={providers} />;
   
   return (
     <div className="scrollbar-hide h-screen overflow-y-scroll bg-gray-50 " >
