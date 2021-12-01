@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signOut,signIn, getProviders } from "next-auth/react"
+import Link from 'next/link'
 
 import {
     SearchIcon,
@@ -11,22 +12,28 @@ import {
     HeartIcon,
     HomeIcon,
 } from '@heroicons/react/outline';
+import { useRouter } from 'next/router';
+
 
 
 const NaveBar = () => {
     const {data: session} = useSession();
-    
+    const router = useRouter();
     return (
         <div className="w-full bg-white shadow-sm h-14 border-b sticky top-0 z-50 " >
             {/* Wrapper */}
             <div className="flex items-center h-full px-2 justify-between max-w-5xl mx-auto " >
                 {/* large logo */}
                 <div className="hidden md:inline-block h-14 w-28  relative " >
-                    <Image layout="fill" objectFit="contain" src="https://seeklogo.com/images/P/pied-piper-logo-254DAE7636-seeklogo.com.png" />
+                    <Image  
+                        onClick={()=> router.push('/') }
+                        layout="fill" objectFit="contain" src="https://seeklogo.com/images/P/pied-piper-logo-254DAE7636-seeklogo.com.png" />
                 </div>
                 {/* small logo  */}
                 <div className="flex-shrink-0 md:hidden h-8 w-8  relative " >
-                    <Image layout="fill" objectFit="contain" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png" />
+                    <Image
+                        onClick={()=> router.push('/') } 
+                        layout="fill" objectFit="contain" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png" />
                 </div>
                 {/* meddle */}
                 <div className="bg-gray-200 w-56 hover:w-60  pr-2 cursor-pointer transform transition-all md:w-72 md:hover:w-80 hover:border-2 hover: border-gray-900 lg:w-96 lg:hover:w-[420px] h-9 rounded-md pl-2 overflow-hidden  flex items-center shadow-sm hover:shadow-md " >
@@ -35,8 +42,12 @@ const NaveBar = () => {
                 </div>
                 {/* right */}
                 <div className="flex items-center " >
-                    <MenuIcon className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
-                    <HomeIcon className="navIcon" />
+                    <MenuIcon
+                        onClick={()=> router.push('/') }
+                        className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
+                    <HomeIcon
+                        onClick={()=> router.push('/') }
+                        className="navIcon" />
                     
                     {
                         session ? (
@@ -55,8 +66,8 @@ const NaveBar = () => {
                                         className="object-contain w-full h-full " src={session.user.image} alt="user" />
                                 </div>
                             </>
-                        ): (
-                            <button onClick={() => signIn()}>Sign in</button>
+                        ) : (
+                            <button onClick={() => signIn("google",{ callbackUrl: '/' })}>Sign in </button>
                         )
                         
                     }
@@ -65,4 +76,7 @@ const NaveBar = () => {
         </div>
     )
 }
+
+
+
 export default NaveBar;
