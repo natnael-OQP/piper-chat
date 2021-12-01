@@ -6,7 +6,7 @@ const Mini_Profile = () => {
             <div className="flex items-center  " >
                 <img
                     className=" cursor-pointer  w-12 h-12 rounded-full object-cover ring-1 ring-black "
-                    src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png"
+                    src={session.user.image}
                     alt='user name' />
                 <div className="ml-4 flex flex-col" >
                     <h1 className="font-semibold  " >{session.user.name}</h1>
