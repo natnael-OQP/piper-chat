@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 import {
     SearchIcon,
@@ -11,11 +12,9 @@ import {
     HomeIcon,
 } from '@heroicons/react/outline';
 
-import { signIn,signOut, useSession} from "next-auth/react"
 
 const NaveBar = () => {
-
-    const { data: session } = useSession();
+    const {data: session} = useSession();
     
     return (
         <div className="w-full bg-white shadow-sm h-14 border-b sticky top-0 z-50 " >
@@ -38,6 +37,7 @@ const NaveBar = () => {
                 <div className="flex items-center " >
                     <MenuIcon className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
                     <HomeIcon className="navIcon" />
+                    
                     {
                         session ? (
                             <>
@@ -51,13 +51,14 @@ const NaveBar = () => {
                                 {/* profile */}
                                 <div className=" hover:scale-105 transform transition-all mx-2 sm:mx-4 ring-1 ring-black w-10  h-10 rounded-full relative shadow-md cursor-pointer overflow-hidden " >
                                     <img
-                                        onClick={signOut}
-                                        className="object-contain w-full h-full " src={session?.user?.image} alt="user" />
+                                        onClick={() => signOut()}
+                                        className="object-contain w-full h-full " src={session.user.image} alt="user" />
                                 </div>
                             </>
                         ): (
-                            <button onClick={signIn} >sign In </button>
+                            <button onClick={() => signIn()}>Sign in</button>
                         )
+                        
                     }
                 </div>
             </div>
