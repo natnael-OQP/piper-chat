@@ -16,9 +16,9 @@ export default NextAuth({
             }
         })
     ],
-    jwt: {
-        encryption:true,
-    },
+    // jwt: {
+    //     encryption:true,
+    // },
     callbacks: {
         async session({ session, token, user }) {
             // Send properties to the client, like an access_token from a provider.
@@ -27,4 +27,7 @@ export default NextAuth({
             return session
         }
     },
+    pages: {
+        signIn:'auth/signin'
+    }
 })
