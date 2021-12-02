@@ -1,15 +1,18 @@
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
 //  recoil
 import { modelState } from "../atoms/modelAtom"
 // headless ui
 import { Dialog,Transition  } from '@headlessui/react'
 import { useRecoilState } from "recoil";
 
+import {
+    CameraIcon
+} from '@heroicons/react/outline';
 
 const Model = () => {
     const [open, setOpen] = useRecoilState(modelState);
+    const filePickerRef = useRef(null)
     
-
     return (
         <Transition.Root show={open} as={Fragment} >
             <Dialog
@@ -45,6 +48,13 @@ const Model = () => {
                         className="inline-block   bg-white rounded-lg  text-left overflow-hidden shadow-lg  transform transition-all my-6 align-middle max-w-sm w-full p-6  " 
                     >
                         <div>
+                            <div
+                                onClick={()=> filePickerRef.current.click() }
+                                className="mx-auto flex items-center justify-center w-12 h-12 rounded-full ring-[1px] ring-green-600 bg-green-50 cursor-pointer shadow-lg  " >
+                                <CameraIcon
+                                    className="w-6 h-6 text-green-500 " aria-hidden="true"
+                                />
+                            </div>
                             <div>
                                 <div className="mt-3 text-center sm:mt-5 "> 
                                     <Dialog.Title
@@ -56,6 +66,7 @@ const Model = () => {
                                 </div>
                                 <div>
                                     <input
+                                        ref={filePickerRef}
                                         type="file"
                                         hidden
                                         />
@@ -75,7 +86,7 @@ const Model = () => {
                         <div className="mt-5 sm:mt-6" >
                             <button
                                 type="button"
-                                className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-400 sm:text-sm disabled:bg-gray-300 disabled:cursor-not-allowed hover:disabled:bg-green-300 "
+                                className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-gray-50 font-bold  bg-green-500 sm:text-sm disabled:bg-gray-300 disabled:cursor-not-allowed hover:disabled:bg-green-400 "
                             >
                                 Upload a post
                             </button>
