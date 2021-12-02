@@ -1,4 +1,4 @@
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 //  recoil
 import { modelState } from "../atoms/modelAtom"
 // headless ui
@@ -6,13 +6,27 @@ import { Dialog,Transition  } from '@headlessui/react'
 import { useRecoilState } from "recoil";
 
 import {
-    CameraIcon
+    CameraIcon, XIcon
 } from '@heroicons/react/outline';
 
 const Model = () => {
     const [open, setOpen] = useRecoilState(modelState);
-    const filePickerRef = useRef(null)
-    
+    const filePickerRef = useRef(null);
+    const [selectedFile,setSelectedFile] = useState(null)
+
+    const addImageToPost = (e) => {
+        const reader = new FileReader();
+        //  read the file 
+        if (e.target.files[0]) {
+            reader.readAsDataURL(e.target.files[0]);
+        }
+
+        reader.onload = (readerEvent) => {
+            setSelectedFile(readerEvent.target.result);
+        }
+
+    }
+
     return (
         <Transition.Root show={open} as={Fragment} >
             <Dialog
@@ -48,13 +62,30 @@ const Model = () => {
                         className="inline-block   bg-white rounded-lg  text-left overflow-hidden shadow-lg  transform transition-all my-6 align-middle max-w-sm w-full p-6  " 
                     >
                         <div>
-                            <div
-                                onClick={()=> filePickerRef.current.click() }
-                                className="mx-auto flex items-center justify-center w-12 h-12 rounded-full ring-[1px] ring-green-600 bg-green-50 cursor-pointer shadow-lg  " >
-                                <CameraIcon
-                                    className="w-6 h-6 text-green-500 " aria-hidden="true"
-                                />
-                            </div>
+                            {
+                                    selectedFile ? (
+                                        <div className="relative !max-h-[500px] !overflow-hidden  " >
+                                            <img
+                                                className=" !max-h-[350px] object-contain w-full cursor-pointer "
+                                                src={selectedFile}
+                                                alt="post file"
+                                            />
+                                            <div
+                                                onClick={()=>setSelectedFile(null)}
+                                                className="hover:scale-105 transition-all duration-300 transform absolute top-1 right-1 flex items-center justify-center w-6 h-6 rounded-full ring-[1px]  ring-red-400 bg-green-50 cursor-pointer shadow-sm" >
+                                                <XIcon className="text-red-400 shadow-lg w-5 h-5   " />
+                                            </div>
+                                        </div>
+                                    ):(
+                                        <div
+                                            onClick={()=> filePickerRef.current.click() }
+                                            className="mx-auto flex items-center justify-center w-12 h-12 rounded-full ring-[1px] ring-green-600 bg-green-50 cursor-pointer shadow-lg  " >
+                                            <CameraIcon
+                                                className="w-6 h-6 text-green-500 " aria-hidden="true"
+                                            />
+                                        </div>
+                                )
+                            }
                             <div>
                                 <div className="mt-3 text-center sm:mt-5 "> 
                                     <Dialog.Title
@@ -66,9 +97,10 @@ const Model = () => {
                                 </div>
                                 <div>
                                     <input
-                                        ref={filePickerRef}
                                         type="file"
                                         hidden
+                                        ref={filePickerRef}
+                                        onChange={addImageToPost}
                                         />
                                 </div>
                                 <div className="mt-2" >
