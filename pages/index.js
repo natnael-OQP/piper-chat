@@ -12,7 +12,13 @@ export default function Home() {
   return (
     <div className="scrollbar-hide h-screen overflow-y-scroll bg-gray-50 " >
       <Head>
-        <title>hi❤️ {session?.user?.name}</title>
+        {
+          session ? (
+            <title>hi{" "}❤️{" "}{session?.user?.name}</title>
+            ) : (
+              <title>Great Ethiopia </title>
+          )
+        }
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Header component */}
