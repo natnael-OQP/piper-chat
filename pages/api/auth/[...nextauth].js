@@ -27,6 +27,7 @@ export default NextAuth({
             return session
         }
     },
+    secret:process.env.secret,
     pages: {
         signIn:'auth/signin'
     }
