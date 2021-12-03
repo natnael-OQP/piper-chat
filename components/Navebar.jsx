@@ -20,12 +20,12 @@ const NaveBar = () => {
     const {data: session} = useSession();
     const router = useRouter();
     // model global state
-    const [open, setOpen] = useRecoilState(modelState);
+    let [open, setOpen] = useRecoilState(modelState);
     // toggle 
     const toggle = () => {
         setOpen(!open);
     }
-    console.log(open);
+
     return (
         <div className="w-full bg-white shadow-sm h-14 border-b sticky top-0 z-50 " >
             {/* Wrapper */}
