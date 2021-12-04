@@ -1,28 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+// firebase
+
+import {  collection, onSnapshot, orderBy, query,  } from "@firebase/firestore";
+import { db } from '../database/firebase';
+
+
 import Post from './post'
 
 const Posts = () => {
-    const Data = [
-        {
-            id: 1,
-            userName: 'natnael',
-            userImage: 'https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png',
-            images: 'https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png',
-            caption:'hello world  '
-        },
-        {
-            id: 2,
-            userName: 'natnael',
-            userImage: 'https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png',
-            images: 'https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png',
-            caption:'hello world  '
-        },
-    ]
+    const [posts, setPosts] = useState([]);
+    
+    useEffect(() => (
+        onSnapshot(query(collection(db, 'posts'), orderBy('timeStamp', 'desc')),
+            (snapshot) => {
+                setPosts(snapshot.docs)
+        })
+    ), [db])
     return (
-        <div className="mt-2" >
+        <div className="mt-2 px-0 mx-0 " >
             {
-                Data.map(({ id, ...content }) => (
-                    <Post key={id} {...content} />
+                posts.map((props) => (
+                    <Post
+                        key={props.id}
+                        id={props.id}
+                        username={props.data().username}
+                        profilePic={props.data().profilePic}
+                        caption={props.data().caption}
+                        image={props.data().image}
+                    />
                 ))
             }
         </div>
