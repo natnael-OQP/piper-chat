@@ -31,13 +31,13 @@ const NaveBar = () => {
             {/* Wrapper */}
             <div className="flex items-center h-full px-2 justify-between max-w-5xl mx-auto " >
                 {/* large logo */}
-                <div className="hidden md:inline-block h-14 w-28  relative " >
+                <div className="hidden md:inline-block h-14 w-28 mr-1 relative " >
                     <Image  
                         onClick={()=> router.push('/') }
                         layout="fill" objectFit="contain" src="https://seeklogo.com/images/P/pied-piper-logo-254DAE7636-seeklogo.com.png" />
                 </div>
                 {/* small logo  */}
-                <div className="flex-shrink-0 md:hidden h-8 w-8  relative " >
+                <div className="flex-shrink-0 md:hidden h-8 w-8 mr-1 relative " >
                     <Image
                         onClick={()=> router.push('/') } 
                         layout="fill" objectFit="contain" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/258_Pied_Piper_logo-512.png" />
@@ -49,9 +49,6 @@ const NaveBar = () => {
                 </div>
                 {/* right */}
                 <div className="flex items-center " >
-                    <MenuIcon
-                        onClick={()=> router.push('/') }
-                        className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
                     <HomeIcon
                         onClick={()=> router.push('/') }
                         className="navIcon" />
@@ -65,18 +62,23 @@ const NaveBar = () => {
                                 </div>
                                 <PlusCircleIcon
                                     onClick={toggle}
-                                    className="navIcon  " />
+                                    className="ml-1 sm:mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
                                 <UserGroupIcon className="navIcon" />
                                 <HeartIcon className="navIcon" />
                                 {/* profile */}
-                                <div className=" hover:scale-105 transform transition-all mx-2 sm:mx-4 ring-1 ring-black w-10  h-10 rounded-full relative shadow-md cursor-pointer overflow-hidden " >
+                                <div className=" hover:scale-105 transform transition-all ml-1 sm:mx-4 ring-1 ring-black w-10  h-10 rounded-full relative shadow-md cursor-pointer overflow-hidden " >
                                     <img
                                         onClick={() => signOut()}
                                         className="object-contain w-full h-full " src={session.user.image} alt="user" />
                                 </div>
                             </>
                         ) : (
-                            <button onClick={() => signIn("google",{ callbackUrl: '/' })}>Sign in </button>
+                                <>
+                                    <MenuIcon
+                                        onClick={()=> router.push('/') }
+                                        className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
+                                    <button onClick={() => signIn("google",{ callbackUrl: '/' })}>Sign in </button>
+                                </>
                         )
                         
                     }
