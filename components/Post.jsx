@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {forwardRef , useEffect, useState } from 'react'
 import Image from 'next/image';
 import {
     BookmarkIcon,
@@ -21,7 +21,7 @@ import { db } from '../database/firebase';
 import Comment from './comment';
 
 
-const Post = ({ id, username, profilePic, caption, image }) => {
+const Post = forwardRef(({ id, username, profilePic, caption, image }) => {
     
     const {data: session} = useSession();
     const [emojis, setEmojis] = useState(false);
@@ -87,7 +87,9 @@ const Post = ({ id, username, profilePic, caption, image }) => {
         await deleteDoc(doc(db, 'posts', id));
     }  
     return (
-        <div className=" bg-white pb-0  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] mb-6 relative rounded-md " >
+        <div
+            ref={ref}
+            className=" bg-white pb-0  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] mb-6 relative rounded-md " >
             {/* Header */}
             <div className="w-full flex items-center justify-between py-4 " >
                 <div className="flex items-center  " >
@@ -195,6 +197,6 @@ const Post = ({ id, username, profilePic, caption, image }) => {
             )}
         </div>
     )
-}
+})
 
 export default Post
