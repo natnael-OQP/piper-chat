@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { useSession, signOut,signIn, getProviders } from "next-auth/react"
+import { useSession, signOut,signIn } from "next-auth/react"
 
 import {
     SearchIcon,
@@ -77,7 +77,9 @@ const NaveBar = () => {
                                     <MenuIcon
                                         onClick={()=> router.push('/') }
                                         className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
-                                    <button onClick={() => signIn("google",{ callbackUrl: '/' })}>Sign in </button>
+                                    <button
+                                        onClick={()=>signIn()}
+                                    >Sign in </button>
                                 </>
                         )
                         
