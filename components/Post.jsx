@@ -1,17 +1,13 @@
-import React, {forwardRef , useEffect, useState } from 'react'
-import Image from 'next/image';
+import React, { forwardRef, useEffect, useState } from 'react';
 import {
     BookmarkIcon,
     ChatIcon,
     DotsHorizontalIcon, EmojiHappyIcon, HeartIcon, PaperAirplaneIcon,
-
 } from '@heroicons/react/outline'
-
 import {
     HeartIcon as HeartIconFilled,
     TrashIcon,
 } from '@heroicons/react/solid'
-
 // ********************------ emojis ------********************
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
@@ -19,6 +15,7 @@ import { useSession } from 'next-auth/react';
 import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from '@firebase/firestore';
 import { db } from '../database/firebase';
 import Comment from './comment';
+import FlipMove from 'react-flip-move';
 
 
 const Post = forwardRef(({ id, username, profilePic, caption, image }) => {
@@ -87,9 +84,7 @@ const Post = forwardRef(({ id, username, profilePic, caption, image }) => {
         await deleteDoc(doc(db, 'posts', id));
     }  
     return (
-        <div
-            ref={ref}
-            className=" bg-white pb-0  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] mb-6 relative rounded-md " >
+        <div ref={ref} className=" bg-white pb-0  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] mb-6 relative rounded-md " >
             {/* Header */}
             <div className="w-full flex items-center justify-between py-4 " >
                 <div className="flex items-center  " >
@@ -145,18 +140,20 @@ const Post = forwardRef(({ id, username, profilePic, caption, image }) => {
             {
                 messages.length > 0 && (
                     <div className="bg-white mx-1 sm:mx-[14px]  h-28 overflow-y-scroll scrollbar-thumb-black scrollbar-thin " >
-                        {
-                            messages.map((props) => (
-                                <Comment
-                                    key={props.id}
-                                    username={props.data().username}
-                                    profilePic={props.data().profilePic}
-                                    message={props.data().message}
-                                    timeStamp={props.data().timeStamp}
-                                    
-                                />
-                            ))
-                        }
+                        <FlipMove>
+                            {
+                                messages.map((props) => (
+                                    <Comment
+                                        key={props.id}
+                                        username={props.data().username}
+                                        profilePic={props.data().profilePic}
+                                        message={props.data().message}
+                                        timeStamp={props.data().timeStamp}
+                                        
+                                    />
+                                ))
+                            }
+                        </FlipMove>
                     </div>
                     )
                 }
