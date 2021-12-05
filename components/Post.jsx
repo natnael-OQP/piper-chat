@@ -8,17 +8,18 @@ import {
 } from '@heroicons/react/outline'
 
 import {
-    HeartIcon as HeartIconFilled
+    HeartIcon as HeartIconFilled,
+    TrashIcon,
 } from '@heroicons/react/solid'
 
 // ********************------ emojis ------********************
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import { useSession } from 'next-auth/react';
-import { addDoc, collection, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from '@firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from '@firebase/firestore';
 import { db } from '../database/firebase';
 import Comment from './comment';
-import { comment } from 'postcss';
+
 
 const Post = ({ id, username, profilePic, caption, image }) => {
     
@@ -26,7 +27,8 @@ const Post = ({ id, username, profilePic, caption, image }) => {
     const [emojis, setEmojis] = useState(false);
     let [input, setInput] = useState('');
     const [messages, setMessages] = useState([]);
-    const [like, setLike] = useState([]);
+    const [likes, setLikes] = useState([]);
+    const [isLiked,setIsLiked] = useState(false);
 
     // get comments from firestore
     useEffect(() =>
@@ -35,15 +37,21 @@ const Post = ({ id, username, profilePic, caption, image }) => {
                 setMessages(snapshot.docs)
             }
         )
-        , [db])
+        , [db,id])
     // get likes from firestore
     useEffect(() => 
         onSnapshot(collection(db, 'posts', id, 'likes'),
-            (snapshot) =>   setLike(snapshot.docs)
+            (snapshot) =>   setLikes(snapshot.docs)
         )
-    , [db])
-
-    // emoji
+    , [db,id])
+    //  setLike
+    useEffect(() =>
+        setIsLiked(
+            likes.findIndex((like) => like.id == session?.user?.uid) !== -1
+        )
+    ,[likes])
+    
+    //************************* emoji *********************************
     const addEmoji = (e) => {
         let sym = e.unified.split("-");
         let codesArray = [];
@@ -52,7 +60,7 @@ const Post = ({ id, username, profilePic, caption, image }) => {
         setInput(input + emoji);
     };
     
-    // send comment
+    //******************** send comment ****************
     const sendComment = async (e) => {
         e.preventDefault();
         const commentToSend = input;
@@ -64,16 +72,22 @@ const Post = ({ id, username, profilePic, caption, image }) => {
             timeStamp: serverTimestamp(),
         })
     }
-    // like posts
-
+    //******************** like posts ********************
     const likePosts = async () => {
-        await setDoc(doc(db, 'posts', id, 'likes',session.user.uid),{
-            username: session.user.name,
-        })
+        if (!isLiked) {
+            await setDoc(doc(db, 'posts', id, 'likes',session.user.uid),{
+                username: session.user.name,
+            })
+        } else {
+            await deleteDoc(doc(db, 'posts',id,'likes',session.user.uid))
+        }   
     }
-
+    //******************** delete post ********************
+    const deletePost = async () => {
+        await deleteDoc(doc(db, 'posts', id));
+    }  
     return (
-        <div className=" bg-white  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] pb-6 relative rounded-md " >
+        <div className=" bg-white pb-0  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] mb-6 relative rounded-md " >
             {/* Header */}
             <div className="w-full flex items-center justify-between py-4 " >
                 <div className="flex items-center  " >
@@ -89,23 +103,46 @@ const Post = ({ id, username, profilePic, caption, image }) => {
             
             <div className="w-full flex items-center  justify-between p-2   " >
                 <div className="flex items-center " >
-                    <HeartIcon
-                        onClick={likePosts}
-                        className="postBtn" />
+                    {
+                        isLiked ? (
+                            <HeartIconFilled
+                                className="postBtn !text-red-600  "
+                                onClick={likePosts}
+                            />
+                        ):(
+                            <HeartIcon
+                                className="postBtn !mr-2 "
+                                onClick={likePosts}
+                            />
+                        ) 
+                    }
+                    {
+                        likes.length > 0 && (
+                            <span className="text-gray-500 text-xs font-semibold mr-3 " >likes{" "}{likes.length}</span>
+                        )
+                    }
+                    {
+                        username === session?.user?.name && (
+                            <TrashIcon
+                                onClick={deletePost}
+                                className="mr-3 w-6 h-6 cursor-pointer  hover:scale-105 transition-all ease-linear duration-100 !text-red-600 hover:animate-bounce "
+                            />
+                        )
+                    }
                     <ChatIcon className="postBtn" />
                     <PaperAirplaneIcon className="postBtn" />
                 </div>
                 <BookmarkIcon className="postBtn" />
             </div>
             {/* caption */}
-            <p className="flex items-center p-[6px]  font-semibold text-gray-800 shadow-md z-50 border-b-[2px]  " >
-                {username+':'} {" "} <span className="text-gray-500 font-normal ml-1 italic ">{caption}</span>
+            <p className="flex items-center p-[6px]  font-bold text-gray-800 shadow-sm z-50 border-b-[2px]  " >
+                {username+':'} {" "} <span className="text-gray-600 font-normal text-sm ml-1 italic ">{caption}</span>
             </p>
             {/* comment */}
             
             {
                 messages.length > 0 && (
-                    <div className="bg-white mx-1 sm:mx-[14px] h-28 overflow-y-scroll scrollbar-thumb-black scrollbar-thin " >
+                    <div className="bg-white mx-1 sm:mx-[14px]  h-28 overflow-y-scroll scrollbar-thumb-black scrollbar-thin " >
                         {
                             messages.map((props) => (
                                 <Comment
@@ -122,7 +159,7 @@ const Post = ({ id, username, profilePic, caption, image }) => {
                     )
                 }
             {/* Input Filled */}
-            <form className="flex items-center p-2 h-10 relative shadow-md border-t-[1px] " >
+            <form className="flex items-center p-2  h-[52px] relative shadow-sm bg-gray-50  " >
                 <EmojiHappyIcon
                     onClick={()=>setEmojis(!emojis)}
                     className="postBtn w-6 h-6 "
@@ -130,7 +167,7 @@ const Post = ({ id, username, profilePic, caption, image }) => {
                 <input
                     value={input}
                     onChange={(e)=>setInput(e.target.value)}
-                    className="shadow-sm text-sm font-medium rounded-md ring-green-300 border-none w-full outline-none py-[5px] px-[10px] focus:ring-1 text-gray-500 " type="text" placeholder="write your comment "
+                    className="my-1 text-sm border-[1px] border-green-300 font-medium rounded-md ring-green-300  w-full outline-none py-[5px] px-[10px] focus:ring-1 text-gray-500 " type="text" placeholder="write your comment "
                 />
                 <button
                     onClick={sendComment}
