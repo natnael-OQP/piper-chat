@@ -88,7 +88,7 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
             {/* Header */}
             <div className="w-full flex items-center justify-between py-4 " >
                 <div className="flex items-center  " >
-                    <img className="w-12 h-12 rounded-full object-cover ring-1 ring-black " src={profilePic} alt={username} />
+                    <img className="w-12 h-12 rounded-full object-cover ring-1 ring-black p-2 " src={profilePic} alt={username} />
                     <h1 className="ml-4" >{username}</h1>
                 </div>
                 <DotsHorizontalIcon className="postBtn" />
@@ -122,7 +122,7 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
                         username === session?.user?.name && (
                             <TrashIcon
                                 onClick={deletePost}
-                                className="mr-3 w-6 h-6 cursor-pointer  hover:scale-105 transition-all ease-linear duration-100 !text-red-600 hover:animate-bounce "
+                                className="mr-3 w-6 h-6 text-red-600 cursor-pointer  hover:scale-105 transition-all ease-linear duration-100 !text-red-600 hover:animate-bounce "
                             />
                         )
                     }
