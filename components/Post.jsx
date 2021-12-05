@@ -18,7 +18,7 @@ import Comment from './comment';
 import FlipMove from 'react-flip-move';
 
 
-const Post = forwardRef(({ id, username, profilePic, caption, image }) => {
+const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
     
     const {data: session} = useSession();
     const [emojis, setEmojis] = useState(false);

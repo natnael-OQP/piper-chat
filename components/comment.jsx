@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import Moment from 'react-moment';
 
-const Comment = forwardRef(({ profilePic, username, message, timeStamp }) => {
+const Comment = forwardRef(({ profilePic, username, message, timeStamp },ref) => {
     return (
         <div ref={ref} className="flex flex-col w-full mb-3 rounded-md bg-gray-50 p-1 shadow-sm " >
             <div className="flex items-center w-full relative  " >
