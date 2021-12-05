@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 // firebase
 import {  collection, onSnapshot, orderBy, query,  } from "@firebase/firestore";
 import { db } from '../database/firebase';
-import Post from './post'
+import Post from './Post'
 import FlipMove from 'react-flip-move';
 
 const Posts = () => {
