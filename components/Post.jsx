@@ -86,9 +86,9 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
     return (
         <div ref={ref} className=" bg-white pb-0  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] mb-6 relative rounded-md " >
             {/* Header */}
-            <div className="w-full flex items-center justify-between py-4 " >
+            <div className="w-full flex items-center justify-between py-4 px-2 " >
                 <div className="flex items-center  " >
-                    <img className="w-12 h-12 rounded-full object-cover ring-1 ring-black p-2 " src={profilePic} alt={username} />
+                    <img className="w-12 h-12 rounded-full object-cover ring-1 ring-black" src={profilePic} alt={username} />
                     <h1 className="ml-4" >{username}</h1>
                 </div>
                 <DotsHorizontalIcon className="postBtn" />
