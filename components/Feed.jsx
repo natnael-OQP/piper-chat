@@ -10,11 +10,13 @@ const Feed = () => {
     
     return (
         <div
-            className={`max-w-md grid grid-cols-1 sm:gap-4 md:grid-cols-3 lg:grid-cols-3 md:max-w-3xl  lg:max-w-4xl h-full mx-auto px-4 overflow-y-hidden  scrollbar-hide ${!session && "!grid-cols-1 !max-w-xl " } `} >
+            className={`w-full max-w-md grid grid-cols-1 sm:gap-4 md:grid-cols-3 lg:grid-cols-3 md:max-w-3xl  lg:max-w-4xl h-full mx-auto px-2 sm:px-4 overflow-y-hidden  scrollbar-hide ${!session && "!grid-cols-1 !max-w-xl " } `} >
             {/* Left */}
-            <section className=" md:col-span-2 lg:col-span-2  mr-4 h-full overflow-y-scroll scrollbar-hide   " >
-                {/* Stories */}
-                <Stories/>
+            <section className=" md:col-span-2 lg:col-span-2 m-0 sm:mr-4 h-full overflow-y-scroll scrollbar-hide   " >
+                {/* Stories 
+                
+                    <Stories/>
+                */}
                 {/* post */}
                 <Posts/>
             </section>
@@ -24,8 +26,9 @@ const Feed = () => {
                     <section className="hidden md:block  h-96 sticky top-14 " >
                         {/* Mini Profile */}
                         <Mini_Profile/>
-                        {/* Suggestion */}
-                        <Suggestion/>
+                        {/* Suggestion 
+                            <Suggestion/>
+                        */}
                     </section>
                 )
             }
