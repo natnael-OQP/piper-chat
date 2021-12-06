@@ -78,7 +78,7 @@ const NaveBar = () => {
                                         onClick={()=> router.push('/') }
                                         className="sm:hidden  mr-2 w-6 h-6 cursor-pointer text-gray-700 hover:scale-110 transition-all ease-linear duration-100  " />
                                     <button
-                                        onClick={()=>signIn()}
+                                        onClick={()=> signIn("google",{ callbackUrl: '/' })}
                                     >Sign in </button>
                                 </>
                         )
