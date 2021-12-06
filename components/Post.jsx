@@ -134,7 +134,7 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
                         username === session?.user?.name && (
                             <TrashIcon
                                 onClick={deletePost}
-                                className="mr-3 w-6 h-6 text-red-600 cursor-pointer  hover:scale-105 transition-all ease-linear duration-100 !text-red-600 hover:animate-bounce "
+                                className="mr-3 w-6 h-6  cursor-pointer  hover:scale-105 transition-all ease-linear duration-100 !text-red-600 hover:animate-bounce "
                             />
                         )
                     }
