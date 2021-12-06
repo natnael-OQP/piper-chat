@@ -82,7 +82,8 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
     //******************** delete post ********************
     const deletePost = async () => {
         await deleteDoc(doc(db, 'posts', id));
-    }  
+    }
+    // 
     return (
         <div ref={ref} className=" bg-white pb-0  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] mb-6 relative rounded-md " >
             {/* Header */}
@@ -179,12 +180,21 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
                     onChange={(e)=>setInput(e.target.value)}
                     className="my-1 text-sm border-[1px] border-green-300 font-medium rounded-md ring-green-300  w-full outline-none py-[5px] px-[10px] focus:ring-1 text-gray-500 " type="text" placeholder="write your comment "
                 />
-                <button
-                    onClick={sendComment}
-                    disabled={!input.trim()}
-                    type="submit"
-                    className="disabled:text-gray-400 disabled:cursor-not-allowed font-semibold text-blue-400 px-1 "
-                >  post </button>
+                {
+                    session ? (
+                        <button
+                            onClick={sendComment}
+                            disabled={!input.trim()}
+                            type="submit"
+                            className="disabled:text-gray-400 disabled:cursor-not-allowed font-semibold text-blue-400 px-1 "
+                        >  post </button>
+                    ) : (
+                        <button
+                            type="submit"
+                            className="text-gray-400 cursor-not-allowed font-semibold  px-1 "
+                        >  post </button>        
+                    )
+                }
             </form>
             {
                 emojis && (
