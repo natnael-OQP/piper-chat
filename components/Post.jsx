@@ -87,20 +87,24 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
     return (
         <div ref={ref} className=" bg-white pb-0  py-1 mt-[15px]  shadow-sm px-[1px] sm:px-[5px] mb-6 relative rounded-md " >
             {/* Header */}
-            <div className="w-full flex items-center justify-between py-4 px-2 " >
+            <div className="w-full flex items-center justify-between py-1 px-2 " >
                 <div className="flex items-center  " >
-                    <img className="w-12 h-12 rounded-full object-cover ring-1 ring-black" src={profilePic} alt={username} />
-                    <h1 className="ml-4" >{username}</h1>
+                    <img className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover ring-1 ring-black" src={profilePic} alt={username} />
+                    <h1 className="ml-2 text-base font-bold text-gray-600" >{username}</h1>
                 </div>
                 <DotsHorizontalIcon className="postBtn" />
             </div>
+            {/* caption */}
+            <p className="flex items-center pl-1 pb-1 text-sm  font-bold text-gray-800" >
+                {username+':'} {" "} <span className="text-gray-500 font-semibold text-sm ml-1 italic ">{caption}</span>
+            </p>
+            {/* image */}
             <div className="max-h-[750px] overflow-y-hidden relative " >
                 <img className="w-full h-full object-contain  " src={image} alt={username} />
             </div>
             {/* Button */}
-            
-            <div className="w-full flex items-center  justify-between p-2   " >
-                <div className="flex items-center " >
+            <div className="w-full flex items-center  justify-between p-2 shadow-sm z-50 border-b-[2px]   " >
+                <div className="flex items-center  py-3 " >
                     {
                         session ? (
                             <>
@@ -143,10 +147,6 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
                 </div>
                 <BookmarkIcon className="postBtn" />
             </div>
-            {/* caption */}
-            <p className="flex items-center p-[6px]  font-bold text-gray-800 shadow-sm z-50 border-b-[2px]  " >
-                {username+':'} {" "} <span className="text-gray-600 font-normal text-sm ml-1 italic ">{caption}</span>
-            </p>
             {/* comment */}
             
             {
