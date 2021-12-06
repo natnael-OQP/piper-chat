@@ -11,7 +11,7 @@ import {
 // ********************------ emojis ------********************
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from '@firebase/firestore';
 import { db } from '../database/firebase';
 import Comment from './comment';
@@ -101,17 +101,28 @@ const Post = forwardRef(({ id, username, profilePic, caption, image },ref) => {
             <div className="w-full flex items-center  justify-between p-2   " >
                 <div className="flex items-center " >
                     {
-                        isLiked ? (
-                            <HeartIconFilled
-                                className="postBtn !text-red-600  "
-                                onClick={likePosts}
-                            />
+                        session ? (
+                            <>
+                                {
+                                    isLiked ? (
+                                        <HeartIconFilled
+                                            className="postBtn !text-red-600  "
+                                            onClick={likePosts}
+                                        />
+                                    ):(
+                                        <HeartIcon
+                                            className="postBtn !mr-2 "
+                                            onClick={likePosts}
+                                        />
+                                    ) 
+                                }
+                            </>
                         ):(
                             <HeartIcon
                                 className="postBtn !mr-2 "
-                                onClick={likePosts}
+                                onClick={()=> signIn("google",{ callbackUrl: '/' }) }
                             />
-                        ) 
+                        )
                     }
                     {
                         likes.length > 0 && (
